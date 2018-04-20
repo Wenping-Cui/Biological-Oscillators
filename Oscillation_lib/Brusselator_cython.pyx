@@ -116,7 +116,8 @@ def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions
               current=[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
               entropy=0;
               for h in range(3):
-                  entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1]) 
+                  if current[2*h+1]>0:
+                    entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1]) 
               if entropy!=float('NaN') and entropy!=float('Inf'):
                  entropy_sum=entropy_sum+entropy
               for h in range(len(action_rate)):

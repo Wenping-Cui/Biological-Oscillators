@@ -1,6 +1,6 @@
 #python cython_setup.py build_ext --inplace
 
-filename = 'Cython_lib/Activator_inhibitor_cython.pyx'
+filename = 'Oscillation_lib/Activator_inhibitor_cython.pyx'
 
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
@@ -13,7 +13,7 @@ setup(
 )    
 
 
-filename = 'Cython_lib/Circle_cython.pyx'
+filename = 'Oscillation_lib/Circle_cython.pyx'
 
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
@@ -26,7 +26,7 @@ setup(
 )    
 
 
-filename = 'Cython_lib/Brusselator_cython.pyx'
+filename = 'Oscillation_lib/Brusselator_cython.pyx'
 
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
