@@ -1408,13 +1408,6 @@ typedef struct {
 #endif
 
 
-/* Print.proto */
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
@@ -1521,9 +1514,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_enum__NPY_TYPES(enum NPY_TYPES v
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
-
-/* PrintOne.proto */
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE size_t __Pyx_PyInt_As_size_t(PyObject *);
@@ -1640,13 +1630,11 @@ static const char __pyx_k_y0[] = "y0";
 static const char __pyx_k_Inf[] = "Inf";
 static const char __pyx_k_NaN[] = "NaN";
 static const char __pyx_k_e_s[] = "e_s";
-static const char __pyx_k_end[] = "end";
 static const char __pyx_k_int[] = "int";
 static const char __pyx_k_k_1[] = "k_1";
 static const char __pyx_k_k_2[] = "k_2";
 static const char __pyx_k_k_3[] = "k_3";
 static const char __pyx_k_n_c[] = "n_c";
-static const char __pyx_k_file[] = "file";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_open[] = "open";
 static const char __pyx_k_step[] = "step";
@@ -1658,7 +1646,6 @@ static const char __pyx_k_File2[] = "File2";
 static const char __pyx_k_close[] = "close";
 static const char __pyx_k_float[] = "float";
 static const char __pyx_k_numpy[] = "numpy";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_time0[] = "time0";
 static const char __pyx_k_time1[] = "time1";
@@ -1732,10 +1719,8 @@ static PyObject *__pyx_n_s_counter;
 static PyObject *__pyx_n_s_counter1;
 static PyObject *__pyx_n_s_current;
 static PyObject *__pyx_n_s_e_s;
-static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_entropy;
 static PyObject *__pyx_n_s_entropy_sum;
-static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_float;
 static PyObject *__pyx_n_s_fname1;
 static PyObject *__pyx_n_s_fname2;
@@ -1764,7 +1749,6 @@ static PyObject *__pyx_n_s_open;
 static PyObject *__pyx_n_s_output1;
 static PyObject *__pyx_n_s_par_ini;
 static PyObject *__pyx_n_s_particle;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_reactionrate;
 static PyObject *__pyx_n_s_rr;
@@ -2042,7 +2026,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  * 
  *     x, y, v, step = par_ini             # <<<<<<<<<<<<<<
  *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
- *     print k_2
+ *     File1 = open(fname1,"w")
  */
   if ((likely(PyTuple_CheckExact(((PyObject *)__pyx_v_par_ini)))) || (PyList_CheckExact(((PyObject *)__pyx_v_par_ini)))) {
     PyObject* sequence = ((PyObject *)__pyx_v_par_ini);
@@ -2122,8 +2106,8 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  * 
  *     x, y, v, step = par_ini
  *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate             # <<<<<<<<<<<<<<
- *     print k_2
  *     File1 = open(fname1,"w")
+ *     File1.write('time, x, y, counter, entropy \n')
  */
   if ((likely(PyTuple_CheckExact(((PyObject *)__pyx_v_reactionrate)))) || (PyList_CheckExact(((PyObject *)__pyx_v_reactionrate)))) {
     PyObject* sequence = ((PyObject *)__pyx_v_reactionrate);
@@ -2226,25 +2210,13 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   /* "Oscillation_lib/Brusselator_cython.pyx":40
  *     x, y, v, step = par_ini
  *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
- *     print k_2             # <<<<<<<<<<<<<<
- *     File1 = open(fname1,"w")
- *     File1.write('time, x, y, counter, entropy \n')
- */
-  __pyx_t_13 = PyFloat_FromDouble(__pyx_v_k_2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_13);
-  if (__Pyx_PrintOne(0, __pyx_t_13) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-
-  /* "Oscillation_lib/Brusselator_cython.pyx":41
- *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
- *     print k_2
  *     File1 = open(fname1,"w")             # <<<<<<<<<<<<<<
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  */
-  __pyx_t_13 = __Pyx_PyBytes_FromString(__pyx_v_fname1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBytes_FromString(__pyx_v_fname1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_GIVEREF(__pyx_t_13);
   PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
@@ -2252,34 +2224,34 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   __Pyx_GIVEREF(__pyx_n_s_w);
   PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_n_s_w);
   __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_File1 = __pyx_t_13;
   __pyx_t_13 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":42
- *     print k_2
+  /* "Oscillation_lib/Brusselator_cython.pyx":41
+ *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')             # <<<<<<<<<<<<<<
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  */
-  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":43
+  /* "Oscillation_lib/Brusselator_cython.pyx":42
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")             # <<<<<<<<<<<<<<
  *     File2.write('time, counter, duration \n')
  *     entropy=0;
  */
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(__pyx_v_fname2);
   __Pyx_GIVEREF(__pyx_v_fname2);
@@ -2287,27 +2259,27 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   __Pyx_INCREF(__pyx_n_s_w);
   __Pyx_GIVEREF(__pyx_n_s_w);
   PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_n_s_w);
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   __pyx_v_File2 = __pyx_t_13;
   __pyx_t_13 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":44
+  /* "Oscillation_lib/Brusselator_cython.pyx":43
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')             # <<<<<<<<<<<<<<
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  */
-  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
-  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":45
+  /* "Oscillation_lib/Brusselator_cython.pyx":44
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  *     entropy=0;             # <<<<<<<<<<<<<<
@@ -2316,7 +2288,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
   __pyx_v_entropy = 0.0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":46
+  /* "Oscillation_lib/Brusselator_cython.pyx":45
  *     File2.write('time, counter, duration \n')
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -2331,7 +2303,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   __pyx_t_19[5] = ((__pyx_v_k_3 * pow(__pyx_v_x, 3.0)) / pow(__pyx_v_v, 2.0));
   memcpy(&(__pyx_v_action_rate[0]), __pyx_t_19, sizeof(__pyx_v_action_rate[0]) * (6));
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":47
+  /* "Oscillation_lib/Brusselator_cython.pyx":46
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;             # <<<<<<<<<<<<<<
@@ -2345,7 +2317,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   __pyx_v_time1 = 0.0;
   __pyx_v_counter1 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":48
+  /* "Oscillation_lib/Brusselator_cython.pyx":47
  *     action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;
  *     for i in range(numberOfReactions):             # <<<<<<<<<<<<<<
@@ -2356,7 +2328,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
     __pyx_v_i = __pyx_t_21;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":49
+    /* "Oscillation_lib/Brusselator_cython.pyx":48
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;
  *     for i in range(numberOfReactions):
  *         e_s=0;             # <<<<<<<<<<<<<<
@@ -2365,7 +2337,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
     __pyx_v_e_s = 0.0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":50
+    /* "Oscillation_lib/Brusselator_cython.pyx":49
  *     for i in range(numberOfReactions):
  *         e_s=0;
  *         entropy_sum=0;             # <<<<<<<<<<<<<<
@@ -2374,7 +2346,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
     __pyx_v_entropy_sum = 0.0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":51
+    /* "Oscillation_lib/Brusselator_cython.pyx":50
  *         e_s=0;
  *         entropy_sum=0;
  *         while time < i/step:             # <<<<<<<<<<<<<<
@@ -2385,7 +2357,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((__pyx_v_time < (__pyx_v_i / __pyx_v_step)) != 0);
       if (!__pyx_t_22) break;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":52
+      /* "Oscillation_lib/Brusselator_cython.pyx":51
  *         entropy_sum=0;
  *         while time < i/step:
  *               x0=x;             # <<<<<<<<<<<<<<
@@ -2394,7 +2366,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       __pyx_v_x0 = __pyx_v_x;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":53
+      /* "Oscillation_lib/Brusselator_cython.pyx":52
  *         while time < i/step:
  *               x0=x;
  *               y0=y;             # <<<<<<<<<<<<<<
@@ -2403,7 +2375,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       __pyx_v_y0 = __pyx_v_y;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":54
+      /* "Oscillation_lib/Brusselator_cython.pyx":53
  *               x0=x;
  *               y0=y;
  *               action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -2418,7 +2390,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_23[5] = ((__pyx_v_k_3 * pow(__pyx_v_x, 3.0)) / pow(__pyx_v_v, 2.0));
       memcpy(&(__pyx_v_action_rate[0]), __pyx_t_23, sizeof(__pyx_v_action_rate[0]) * (6));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":55
+      /* "Oscillation_lib/Brusselator_cython.pyx":54
  *               y0=y;
  *               action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               current=[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -2433,7 +2405,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_24[5] = ((__pyx_v_k_3 * pow(__pyx_v_x, 3.0)) / pow(__pyx_v_v, 2.0));
       memcpy(&(__pyx_v_current[0]), __pyx_t_24, sizeof(__pyx_v_current[0]) * (6));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":56
+      /* "Oscillation_lib/Brusselator_cython.pyx":55
  *               action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               current=[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               entropy=0;             # <<<<<<<<<<<<<<
@@ -2442,7 +2414,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       __pyx_v_entropy = 0.0;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":57
+      /* "Oscillation_lib/Brusselator_cython.pyx":56
  *               current=[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               entropy=0;
  *               for h in range(3):             # <<<<<<<<<<<<<<
@@ -2452,7 +2424,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       for (__pyx_t_25 = 0; __pyx_t_25 < 3; __pyx_t_25+=1) {
         __pyx_v_h = __pyx_t_25;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":58
+        /* "Oscillation_lib/Brusselator_cython.pyx":57
  *               entropy=0;
  *               for h in range(3):
  *                   entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])             # <<<<<<<<<<<<<<
@@ -2462,27 +2434,27 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         __pyx_v_entropy = (__pyx_v_entropy + (((__pyx_v_current[(2 * __pyx_v_h)]) - (__pyx_v_current[((2 * __pyx_v_h) + 1)])) * log(((__pyx_v_current[(2 * __pyx_v_h)]) / (__pyx_v_current[((2 * __pyx_v_h) + 1)])))));
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":59
+      /* "Oscillation_lib/Brusselator_cython.pyx":58
  *               for h in range(3):
  *                   entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):             # <<<<<<<<<<<<<<
  *                  entropy_sum=entropy_sum+entropy
  *                  e_s=e_s+1
  */
-      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_n_s_NaN); if (unlikely(__pyx_t_18 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_n_s_NaN); if (unlikely(__pyx_t_18 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L1_error)
       __pyx_t_26 = ((__pyx_v_entropy != __pyx_t_18) != 0);
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L14_bool_binop_done;
       }
-      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_n_s_Inf); if (unlikely(__pyx_t_18 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+      __pyx_t_18 = __Pyx_PyObject_AsDouble(__pyx_n_s_Inf); if (unlikely(__pyx_t_18 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 58, __pyx_L1_error)
       __pyx_t_26 = ((__pyx_v_entropy != __pyx_t_18) != 0);
       __pyx_t_22 = __pyx_t_26;
       __pyx_L14_bool_binop_done:;
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":60
+        /* "Oscillation_lib/Brusselator_cython.pyx":59
  *                   entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):
  *                  entropy_sum=entropy_sum+entropy             # <<<<<<<<<<<<<<
@@ -2491,7 +2463,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_entropy_sum = (__pyx_v_entropy_sum + __pyx_v_entropy);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":61
+        /* "Oscillation_lib/Brusselator_cython.pyx":60
  *               if entropy!=float('NaN') and entropy!=float('Inf'):
  *                  entropy_sum=entropy_sum+entropy
  *                  e_s=e_s+1             # <<<<<<<<<<<<<<
@@ -2500,7 +2472,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_e_s = (__pyx_v_e_s + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":59
+        /* "Oscillation_lib/Brusselator_cython.pyx":58
  *               for h in range(3):
  *                   entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):             # <<<<<<<<<<<<<<
@@ -2509,7 +2481,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":62
+      /* "Oscillation_lib/Brusselator_cython.pyx":61
  *                  entropy_sum=entropy_sum+entropy
  *                  e_s=e_s+1
  *               a0=a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2+k_3*x**3/v**2             # <<<<<<<<<<<<<<
@@ -2518,7 +2490,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       __pyx_v_a0 = ((((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_v_k2 * __pyx_v_b)) + (__pyx_v_k_2 * __pyx_v_y)) + (((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y) / pow(__pyx_v_v, 2.0))) + ((__pyx_v_k_3 * pow(__pyx_v_x, 3.0)) / pow(__pyx_v_v, 2.0)));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":64
+      /* "Oscillation_lib/Brusselator_cython.pyx":63
  *               a0=a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2+k_3*x**3/v**2
  *               #print 'sum of rates', sum_rate
  *               rr[0], rr[1]=(rand()+1.00)/(RAND_MAX + 1.00), (rand()+1.00)/(RAND_MAX + 1.00)             # <<<<<<<<<<<<<<
@@ -2530,7 +2502,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       (__pyx_v_rr[0]) = __pyx_t_18;
       (__pyx_v_rr[1]) = __pyx_t_17;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":65
+      /* "Oscillation_lib/Brusselator_cython.pyx":64
  *               #print 'sum of rates', sum_rate
  *               rr[0], rr[1]=(rand()+1.00)/(RAND_MAX + 1.00), (rand()+1.00)/(RAND_MAX + 1.00)
  *               time=time+(1.000/a0)*log(1.000/rr[0]);             # <<<<<<<<<<<<<<
@@ -2539,7 +2511,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       __pyx_v_time = (__pyx_v_time + ((1.000 / __pyx_v_a0) * log((1.000 / (__pyx_v_rr[0])))));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":67
+      /* "Oscillation_lib/Brusselator_cython.pyx":66
  *               time=time+(1.000/a0)*log(1.000/rr[0]);
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1             # <<<<<<<<<<<<<<
@@ -2549,7 +2521,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (__pyx_v_a * __pyx_v_k1)) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":68
+        /* "Oscillation_lib/Brusselator_cython.pyx":67
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1             # <<<<<<<<<<<<<<
@@ -2558,7 +2530,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_x = (__pyx_v_x + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":67
+        /* "Oscillation_lib/Brusselator_cython.pyx":66
  *               time=time+(1.000/a0)*log(1.000/rr[0]);
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1             # <<<<<<<<<<<<<<
@@ -2568,7 +2540,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         goto __pyx_L16;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":69
+      /* "Oscillation_lib/Brusselator_cython.pyx":68
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x             # <<<<<<<<<<<<<<
@@ -2578,7 +2550,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < ((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x))) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":70
+        /* "Oscillation_lib/Brusselator_cython.pyx":69
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1             # <<<<<<<<<<<<<<
@@ -2587,7 +2559,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_x = (__pyx_v_x - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":69
+        /* "Oscillation_lib/Brusselator_cython.pyx":68
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x             # <<<<<<<<<<<<<<
@@ -2597,7 +2569,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         goto __pyx_L16;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":71
+      /* "Oscillation_lib/Brusselator_cython.pyx":70
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b:# k2*b             # <<<<<<<<<<<<<<
@@ -2607,7 +2579,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_v_k2 * __pyx_v_b))) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":72
+        /* "Oscillation_lib/Brusselator_cython.pyx":71
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b:# k2*b
  *                  y=y+1             # <<<<<<<<<<<<<<
@@ -2616,7 +2588,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_y = (__pyx_v_y + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":71
+        /* "Oscillation_lib/Brusselator_cython.pyx":70
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b:# k2*b             # <<<<<<<<<<<<<<
@@ -2626,7 +2598,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         goto __pyx_L16;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":73
+      /* "Oscillation_lib/Brusselator_cython.pyx":72
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b:# k2*b
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y:   #k_2*y             # <<<<<<<<<<<<<<
@@ -2636,7 +2608,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < ((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_v_k2 * __pyx_v_b)) + (__pyx_v_k_2 * __pyx_v_y))) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":74
+        /* "Oscillation_lib/Brusselator_cython.pyx":73
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y:   #k_2*y
  *                  y=y-1;             # <<<<<<<<<<<<<<
@@ -2645,7 +2617,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_y = (__pyx_v_y - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":73
+        /* "Oscillation_lib/Brusselator_cython.pyx":72
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b:# k2*b
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y:   #k_2*y             # <<<<<<<<<<<<<<
@@ -2655,7 +2627,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         goto __pyx_L16;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":75
+      /* "Oscillation_lib/Brusselator_cython.pyx":74
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y:   #k_2*y
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2: #k3*x**2*y/v**2             # <<<<<<<<<<<<<<
@@ -2665,7 +2637,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_v_k2 * __pyx_v_b)) + (__pyx_v_k_2 * __pyx_v_y)) + (((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y) / pow(__pyx_v_v, 2.0)))) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":76
+        /* "Oscillation_lib/Brusselator_cython.pyx":75
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2: #k3*x**2*y/v**2
  *                  x=x+1             # <<<<<<<<<<<<<<
@@ -2674,7 +2646,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_x = (__pyx_v_x + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":77
+        /* "Oscillation_lib/Brusselator_cython.pyx":76
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2: #k3*x**2*y/v**2
  *                  x=x+1
  *                  y=y-1             # <<<<<<<<<<<<<<
@@ -2683,7 +2655,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_y = (__pyx_v_y - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":75
+        /* "Oscillation_lib/Brusselator_cython.pyx":74
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y:   #k_2*y
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b+k_2*y+k3*x**2*y/v**2: #k3*x**2*y/v**2             # <<<<<<<<<<<<<<
@@ -2693,7 +2665,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         goto __pyx_L16;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":78
+      /* "Oscillation_lib/Brusselator_cython.pyx":77
  *                  x=x+1
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2             # <<<<<<<<<<<<<<
@@ -2703,7 +2675,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       __pyx_t_22 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < __pyx_v_a0) != 0);
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":79
+        /* "Oscillation_lib/Brusselator_cython.pyx":78
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2
  *                  x=x-1             # <<<<<<<<<<<<<<
@@ -2712,7 +2684,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_x = (__pyx_v_x - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":80
+        /* "Oscillation_lib/Brusselator_cython.pyx":79
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2
  *                  x=x-1
  *                  y=y+1             # <<<<<<<<<<<<<<
@@ -2721,7 +2693,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_y = (__pyx_v_y + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":78
+        /* "Oscillation_lib/Brusselator_cython.pyx":77
  *                  x=x+1
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2             # <<<<<<<<<<<<<<
@@ -2731,60 +2703,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       }
       __pyx_L16:;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":82
+      /* "Oscillation_lib/Brusselator_cython.pyx":81
  *                  y=y+1
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  */
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_13 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L18_bool_binop_done;
       }
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L18_bool_binop_done;
       }
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_t_13, Py_EQ); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_t_13, Py_EQ); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L18_bool_binop_done;
       }
-      __pyx_t_11 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_11 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_13 = PyObject_RichCompare(__pyx_t_11, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_13 = PyObject_RichCompare(__pyx_t_11, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 81, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __pyx_t_22 = __pyx_t_26;
       __pyx_L18_bool_binop_done:;
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":83
+        /* "Oscillation_lib/Brusselator_cython.pyx":82
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:
  *                   counter=counter+1;             # <<<<<<<<<<<<<<
@@ -2793,60 +2765,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_counter = (__pyx_v_counter + 1);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":84
+        /* "Oscillation_lib/Brusselator_cython.pyx":83
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')             # <<<<<<<<<<<<<<
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  */
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_12 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_12 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_12);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_12);
         __pyx_t_12 = 0;
-        __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_12);
         PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_12);
         __pyx_t_12 = 0;
-        __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_t_12); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __pyx_t_12 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_12 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyFloat_FromDouble((__pyx_v_time - __pyx_v_time0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_1 = PyFloat_FromDouble((__pyx_v_time - __pyx_v_time0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
         __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_12, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_12, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
+        __pyx_t_1 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = NULL;
@@ -2860,14 +2832,14 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
           }
         }
         if (!__pyx_t_5) {
-          __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 84, __pyx_L1_error)
+          __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 83, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GOTREF(__pyx_t_13);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_11)) {
             PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
-            __pyx_t_13 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 84, __pyx_L1_error)
+            __pyx_t_13 = __Pyx_PyFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 83, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2876,20 +2848,20 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_11)) {
             PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_1};
-            __pyx_t_13 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 84, __pyx_L1_error)
+            __pyx_t_13 = __Pyx_PyCFunction_FastCall(__pyx_t_11, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 83, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           } else
           #endif
           {
-            __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 84, __pyx_L1_error)
+            __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 83, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5); __pyx_t_5 = NULL;
             __Pyx_GIVEREF(__pyx_t_1);
             PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_1);
             __pyx_t_1 = 0;
-            __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 84, __pyx_L1_error)
+            __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 83, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
           }
@@ -2897,7 +2869,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":85
+        /* "Oscillation_lib/Brusselator_cython.pyx":84
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time             # <<<<<<<<<<<<<<
@@ -2906,7 +2878,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_time0 = __pyx_v_time;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":82
+        /* "Oscillation_lib/Brusselator_cython.pyx":81
  *                  y=y+1
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
@@ -2915,60 +2887,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":86
+      /* "Oscillation_lib/Brusselator_cython.pyx":85
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  */
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_t_11, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_t_11, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_11 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_11 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_11, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_11, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       if (__pyx_t_26) {
       } else {
         __pyx_t_22 = __pyx_t_26;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_11 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 86, __pyx_L1_error)
+      __pyx_t_26 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_26 < 0)) __PYX_ERR(0, 85, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __pyx_t_22 = __pyx_t_26;
       __pyx_L23_bool_binop_done:;
       if (__pyx_t_22) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":87
+        /* "Oscillation_lib/Brusselator_cython.pyx":86
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  *                   counter=counter-1;             # <<<<<<<<<<<<<<
@@ -2977,43 +2949,43 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
  */
         __pyx_v_counter = (__pyx_v_counter - 1);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":88
+        /* "Oscillation_lib/Brusselator_cython.pyx":87
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')             # <<<<<<<<<<<<<<
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum/e_s)+'\n';
  *         File1.write(output1)
  */
-        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_13 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_13 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_13);
         PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_13);
         __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_1 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_13);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_13);
         __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __pyx_t_13 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 88, __pyx_L1_error)
+        __pyx_t_13 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 87, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = NULL;
@@ -3027,14 +2999,14 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
           }
         }
         if (!__pyx_t_5) {
-          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
+          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           __Pyx_GOTREF(__pyx_t_11);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_12)) {
             PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_13};
-            __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -3043,20 +3015,20 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_12)) {
             PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_13};
-            __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           } else
           #endif
           {
-            __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+            __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
             __Pyx_GIVEREF(__pyx_t_13);
             PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_13);
             __pyx_t_13 = 0;
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           }
@@ -3064,7 +3036,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":86
+        /* "Oscillation_lib/Brusselator_cython.pyx":85
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
@@ -3074,105 +3046,105 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       }
     }
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":89
+    /* "Oscillation_lib/Brusselator_cython.pyx":88
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum/e_s)+'\n';             # <<<<<<<<<<<<<<
  *         File1.write(output1)
  *     File1.close()
  */
-    __pyx_t_11 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__4); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_GIVEREF(__pyx_t_12);
     PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12);
     __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyFloat_FromDouble((__pyx_v_entropy_sum / __pyx_v_e_s)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyFloat_FromDouble((__pyx_v_entropy_sum / __pyx_v_e_s)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_GIVEREF(__pyx_t_11);
     PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11);
     __pyx_t_11 = 0;
-    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Add(__pyx_t_12, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_11 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 88, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF_SET(__pyx_v_output1, __pyx_t_11);
     __pyx_t_11 = 0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":90
+    /* "Oscillation_lib/Brusselator_cython.pyx":89
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum/e_s)+'\n';
  *         File1.write(output1)             # <<<<<<<<<<<<<<
  *     File1.close()
  *     File2.close()
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_12 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -3185,13 +3157,13 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       }
     }
     if (!__pyx_t_12) {
-      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_output1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_output1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_v_output1};
-        __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_11);
       } else
@@ -3199,19 +3171,19 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
         PyObject *__pyx_temp[2] = {__pyx_t_12, __pyx_v_output1};
-        __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_GOTREF(__pyx_t_11);
       } else
       #endif
       {
-        __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_GIVEREF(__pyx_t_12); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_12); __pyx_t_12 = NULL;
         __Pyx_INCREF(__pyx_v_output1);
         __Pyx_GIVEREF(__pyx_v_output1);
         PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_v_output1);
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_13, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_13, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 89, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       }
@@ -3220,14 +3192,43 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":91
+  /* "Oscillation_lib/Brusselator_cython.pyx":90
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum/e_s)+'\n';
  *         File1.write(output1)
  *     File1.close()             # <<<<<<<<<<<<<<
  *     File2.close()
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_close); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_close); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_13 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_13)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_13);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+    }
+  }
+  if (__pyx_t_13) {
+    __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+  } else {
+    __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 90, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+
+  /* "Oscillation_lib/Brusselator_cython.pyx":91
+ *         File1.write(output1)
+ *     File1.close()
+ *     File2.close()             # <<<<<<<<<<<<<<
+ * 
+ * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):
+ */
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_close); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_13 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
@@ -3244,35 +3245,6 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
   } else {
     __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 91, __pyx_L1_error)
-  }
-  __Pyx_GOTREF(__pyx_t_11);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-
-  /* "Oscillation_lib/Brusselator_cython.pyx":92
- *         File1.write(output1)
- *     File1.close()
- *     File2.close()             # <<<<<<<<<<<<<<
- * 
- * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_close); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_13 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_13)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_13);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
-    }
-  }
-  if (__pyx_t_13) {
-    __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 92, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  } else {
-    __pyx_t_11 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 92, __pyx_L1_error)
   }
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3321,7 +3293,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_Brusse_Barato_l
   return __pyx_r;
 }
 
-/* "Oscillation_lib/Brusselator_cython.pyx":94
+/* "Oscillation_lib/Brusselator_cython.pyx":93
  *     File2.close()
  * 
  * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):             # <<<<<<<<<<<<<<
@@ -3379,47 +3351,47 @@ static PyObject *__pyx_pw_15Oscillation_lib_18Brusselator_cython_3Brusselator_lo
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_fname2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 1); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 1); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_fname3)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 2); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 2); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_numberOfReactions)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 3); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 3); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_win_threshold1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 4); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 4); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_win_threshold2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 5); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 5); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_reactionrate)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 6); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 6); __PYX_ERR(0, 93, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_par_ini)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 7); __PYX_ERR(0, 94, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, 7); __PYX_ERR(0, 93, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Brusselator_loopProgress") < 0)) __PYX_ERR(0, 94, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Brusselator_loopProgress") < 0)) __PYX_ERR(0, 93, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 8) {
       goto __pyx_L5_argtuple_error;
@@ -3433,10 +3405,10 @@ static PyObject *__pyx_pw_15Oscillation_lib_18Brusselator_cython_3Brusselator_lo
       values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
       values[7] = PyTuple_GET_ITEM(__pyx_args, 7);
     }
-    __pyx_v_fname1 = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_fname1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
+    __pyx_v_fname1 = __Pyx_PyObject_AsWritableString(values[0]); if (unlikely((!__pyx_v_fname1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L3_error)
     __pyx_v_fname2 = values[1];
     __pyx_v_fname3 = values[2];
-    __pyx_v_numberOfReactions = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_numberOfReactions == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 94, __pyx_L3_error)
+    __pyx_v_numberOfReactions = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_numberOfReactions == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L3_error)
     __pyx_v_win_threshold1 = values[4];
     __pyx_v_win_threshold2 = values[5];
     __pyx_v_reactionrate = ((PyArrayObject *)values[6]);
@@ -3444,14 +3416,14 @@ static PyObject *__pyx_pw_15Oscillation_lib_18Brusselator_cython_3Brusselator_lo
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 94, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Brusselator_loopProgress", 1, 8, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 93, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("Oscillation_lib.Brusselator_cython.Brusselator_loopProgress", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_reactionrate), __pyx_ptype_5numpy_ndarray, 1, "reactionrate", 0))) __PYX_ERR(0, 94, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_par_ini), __pyx_ptype_5numpy_ndarray, 1, "par_ini", 0))) __PYX_ERR(0, 94, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_reactionrate), __pyx_ptype_5numpy_ndarray, 1, "reactionrate", 0))) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_par_ini), __pyx_ptype_5numpy_ndarray, 1, "par_ini", 0))) __PYX_ERR(0, 93, __pyx_L1_error)
   __pyx_r = __pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_loopProgress(__pyx_self, __pyx_v_fname1, __pyx_v_fname2, __pyx_v_fname3, __pyx_v_numberOfReactions, __pyx_v_win_threshold1, __pyx_v_win_threshold2, __pyx_v_reactionrate, __pyx_v_par_ini);
 
   /* function exit code */
@@ -3544,16 +3516,16 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_pybuffernd_par_ini.rcbuffer = &__pyx_pybuffer_par_ini;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_reactionrate.rcbuffer->pybuffer, (PyObject*)__pyx_v_reactionrate, &__Pyx_TypeInfo_nn___pyx_t_15Oscillation_lib_18Brusselator_cython_DTYPE2_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_reactionrate.rcbuffer->pybuffer, (PyObject*)__pyx_v_reactionrate, &__Pyx_TypeInfo_nn___pyx_t_15Oscillation_lib_18Brusselator_cython_DTYPE2_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 93, __pyx_L1_error)
   }
   __pyx_pybuffernd_reactionrate.diminfo[0].strides = __pyx_pybuffernd_reactionrate.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_reactionrate.diminfo[0].shape = __pyx_pybuffernd_reactionrate.rcbuffer->pybuffer.shape[0];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_par_ini.rcbuffer->pybuffer, (PyObject*)__pyx_v_par_ini, &__Pyx_TypeInfo_nn___pyx_t_15Oscillation_lib_18Brusselator_cython_DTYPE2_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 94, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_par_ini.rcbuffer->pybuffer, (PyObject*)__pyx_v_par_ini, &__Pyx_TypeInfo_nn___pyx_t_15Oscillation_lib_18Brusselator_cython_DTYPE2_t, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 93, __pyx_L1_error)
   }
   __pyx_pybuffernd_par_ini.diminfo[0].strides = __pyx_pybuffernd_par_ini.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_par_ini.diminfo[0].shape = __pyx_pybuffernd_par_ini.rcbuffer->pybuffer.shape[0];
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":99
+  /* "Oscillation_lib/Brusselator_cython.pyx":98
  *     cdef double action_rate[6], sum_rate[6], time0, current[6], entropy_sum, entropy,e_s
  * 
  *     x, y, v, step= par_ini             # <<<<<<<<<<<<<<
@@ -3570,7 +3542,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     if (unlikely(size != 4)) {
       if (size > 4) __Pyx_RaiseTooManyValuesError(4);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 99, __pyx_L1_error)
+      __PYX_ERR(0, 98, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -3593,7 +3565,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       Py_ssize_t i;
       PyObject** temps[4] = {&__pyx_t_1,&__pyx_t_2,&__pyx_t_3,&__pyx_t_4};
       for (i=0; i < 4; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 99, __pyx_L1_error)
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 98, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -3602,7 +3574,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[4] = {&__pyx_t_1,&__pyx_t_2,&__pyx_t_3,&__pyx_t_4};
-    __pyx_t_5 = PyObject_GetIter(((PyObject *)__pyx_v_par_ini)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 99, __pyx_L1_error)
+    __pyx_t_5 = PyObject_GetIter(((PyObject *)__pyx_v_par_ini)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = Py_TYPE(__pyx_t_5)->tp_iternext;
     for (index=0; index < 4; index++) {
@@ -3610,7 +3582,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 4) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_5), 4) < 0) __PYX_ERR(0, 98, __pyx_L1_error)
     __pyx_t_6 = NULL;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     goto __pyx_L4_unpacking_done;
@@ -3618,23 +3590,23 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 99, __pyx_L1_error)
+    __PYX_ERR(0, 98, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_x = __pyx_t_7;
   __pyx_v_y = __pyx_t_8;
   __pyx_v_v = __pyx_t_9;
   __pyx_v_step = __pyx_t_10;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":100
+  /* "Oscillation_lib/Brusselator_cython.pyx":99
  * 
  *     x, y, v, step= par_ini
  *     a, b, c, k1, k2, k3, k_1, k_2, k_3 = reactionrate             # <<<<<<<<<<<<<<
@@ -3651,7 +3623,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     if (unlikely(size != 9)) {
       if (size > 9) __Pyx_RaiseTooManyValuesError(9);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 100, __pyx_L1_error)
+      __PYX_ERR(0, 99, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -3689,7 +3661,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       Py_ssize_t i;
       PyObject** temps[9] = {&__pyx_t_4,&__pyx_t_3,&__pyx_t_2,&__pyx_t_1,&__pyx_t_5,&__pyx_t_11,&__pyx_t_12,&__pyx_t_13,&__pyx_t_14};
       for (i=0; i < 9; i++) {
-        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 100, __pyx_L1_error)
+        PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 99, __pyx_L1_error)
         __Pyx_GOTREF(item);
         *(temps[i]) = item;
       }
@@ -3698,7 +3670,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   } else {
     Py_ssize_t index = -1;
     PyObject** temps[9] = {&__pyx_t_4,&__pyx_t_3,&__pyx_t_2,&__pyx_t_1,&__pyx_t_5,&__pyx_t_11,&__pyx_t_12,&__pyx_t_13,&__pyx_t_14};
-    __pyx_t_15 = PyObject_GetIter(((PyObject *)__pyx_v_reactionrate)); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 100, __pyx_L1_error)
+    __pyx_t_15 = PyObject_GetIter(((PyObject *)__pyx_v_reactionrate)); if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_15);
     __pyx_t_6 = Py_TYPE(__pyx_t_15)->tp_iternext;
     for (index=0; index < 9; index++) {
@@ -3706,7 +3678,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __Pyx_GOTREF(item);
       *(temps[index]) = item;
     }
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_15), 9) < 0) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_15), 9) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
     __pyx_t_6 = NULL;
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
     goto __pyx_L6_unpacking_done;
@@ -3714,26 +3686,26 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
     __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 100, __pyx_L1_error)
+    __PYX_ERR(0, 99, __pyx_L1_error)
     __pyx_L6_unpacking_done:;
   }
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_4); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_7 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_16 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_16 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_17 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_17 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_17 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_18 = __pyx_PyFloat_AsDouble(__pyx_t_12); if (unlikely((__pyx_t_18 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_t_13); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_19 = __pyx_PyFloat_AsDouble(__pyx_t_13); if (unlikely((__pyx_t_19 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-  __pyx_t_20 = __pyx_PyFloat_AsDouble(__pyx_t_14); if (unlikely((__pyx_t_20 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_20 = __pyx_PyFloat_AsDouble(__pyx_t_14); if (unlikely((__pyx_t_20 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __pyx_v_a = __pyx_t_10;
   __pyx_v_b = __pyx_t_9;
@@ -3745,16 +3717,16 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_v_k_2 = __pyx_t_19;
   __pyx_v_k_3 = __pyx_t_20;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":102
+  /* "Oscillation_lib/Brusselator_cython.pyx":101
  *     a, b, c, k1, k2, k3, k_1, k_2, k_3 = reactionrate
  *    # print R, X, MR, Mp, MpK,M
  *     File1 = open(fname1,"w")             # <<<<<<<<<<<<<<
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  */
-  __pyx_t_14 = __Pyx_PyBytes_FromString(__pyx_v_fname1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyBytes_FromString(__pyx_v_fname1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_GIVEREF(__pyx_t_14);
   PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14);
@@ -3762,34 +3734,34 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __Pyx_GIVEREF(__pyx_n_s_w);
   PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_n_s_w);
   __pyx_t_14 = 0;
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
   __pyx_v_File1 = __pyx_t_14;
   __pyx_t_14 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":103
+  /* "Oscillation_lib/Brusselator_cython.pyx":102
  *    # print R, X, MR, Mp, MpK,M
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')             # <<<<<<<<<<<<<<
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  */
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":104
+  /* "Oscillation_lib/Brusselator_cython.pyx":103
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")             # <<<<<<<<<<<<<<
  *     File2.write('time, counter, duration \n')
  *     entropy=0;
  */
-  __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_13 = PyTuple_New(2); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_INCREF(__pyx_v_fname2);
   __Pyx_GIVEREF(__pyx_v_fname2);
@@ -3797,27 +3769,27 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __Pyx_INCREF(__pyx_n_s_w);
   __Pyx_GIVEREF(__pyx_n_s_w);
   PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_n_s_w);
-  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
   __pyx_v_File2 = __pyx_t_14;
   __pyx_t_14 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":105
+  /* "Oscillation_lib/Brusselator_cython.pyx":104
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')             # <<<<<<<<<<<<<<
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  */
-  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
-  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":106
+  /* "Oscillation_lib/Brusselator_cython.pyx":105
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  *     entropy=0;             # <<<<<<<<<<<<<<
@@ -3826,7 +3798,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
   __pyx_v_entropy = 0.0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":107
+  /* "Oscillation_lib/Brusselator_cython.pyx":106
  *     File2.write('time, counter, duration \n')
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -3836,24 +3808,24 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_t_20 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
   if (unlikely(__pyx_v_v == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 107, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
   __pyx_t_19 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
   if (unlikely(__pyx_v_v == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 107, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
   __pyx_t_18 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
   __pyx_t_17 = pow(__pyx_v_v, 2.0);
   if (unlikely(__pyx_t_17 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 107, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
   __pyx_t_16 = (__pyx_v_k_3 * pow(__pyx_v_x, 3.0));
   __pyx_t_7 = pow(__pyx_v_v, 2.0);
   if (unlikely(__pyx_t_7 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 107, __pyx_L1_error)
+    __PYX_ERR(0, 106, __pyx_L1_error)
   }
   __pyx_t_21[0] = (__pyx_v_a * __pyx_v_k1);
   __pyx_t_21[1] = (__pyx_v_k_1 * __pyx_v_x);
@@ -3863,7 +3835,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_t_21[5] = (__pyx_t_16 / __pyx_t_7);
   memcpy(&(__pyx_v_action_rate[0]), __pyx_t_21, sizeof(__pyx_v_action_rate[0]) * (6));
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":108
+  /* "Oscillation_lib/Brusselator_cython.pyx":107
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;             # <<<<<<<<<<<<<<
@@ -3877,7 +3849,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_v_time1 = 0.0;
   __pyx_v_counter1 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":109
+  /* "Oscillation_lib/Brusselator_cython.pyx":108
  *     action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;
  *     for i in xrange(numberOfReactions):             # <<<<<<<<<<<<<<
@@ -3888,7 +3860,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   for (__pyx_t_23 = 0; __pyx_t_23 < __pyx_t_22; __pyx_t_23+=1) {
     __pyx_v_i = __pyx_t_23;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":110
+    /* "Oscillation_lib/Brusselator_cython.pyx":109
  *     i=0; time=0.00; counter=0; time0=0; time1=0; counter1=0;
  *     for i in xrange(numberOfReactions):
  *         e_s=0;             # <<<<<<<<<<<<<<
@@ -3897,7 +3869,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
     __pyx_v_e_s = 0.0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":111
+    /* "Oscillation_lib/Brusselator_cython.pyx":110
  *     for i in xrange(numberOfReactions):
  *         e_s=0;
  *         entropy_sum=0;             # <<<<<<<<<<<<<<
@@ -3906,7 +3878,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
     __pyx_v_entropy_sum = 0.0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":112
+    /* "Oscillation_lib/Brusselator_cython.pyx":111
  *         e_s=0;
  *         entropy_sum=0;
  *         while time < i/step:             # <<<<<<<<<<<<<<
@@ -3916,12 +3888,12 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     while (1) {
       if (unlikely(__pyx_v_step == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 112, __pyx_L1_error)
+        __PYX_ERR(0, 111, __pyx_L1_error)
       }
       __pyx_t_24 = ((__pyx_v_time < (__pyx_v_i / __pyx_v_step)) != 0);
       if (!__pyx_t_24) break;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":113
+      /* "Oscillation_lib/Brusselator_cython.pyx":112
  *         entropy_sum=0;
  *         while time < i/step:
  *               x0=x;             # <<<<<<<<<<<<<<
@@ -3930,7 +3902,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       __pyx_v_x0 = __pyx_v_x;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":114
+      /* "Oscillation_lib/Brusselator_cython.pyx":113
  *         while time < i/step:
  *               x0=x;
  *               y0=y;             # <<<<<<<<<<<<<<
@@ -3939,7 +3911,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       __pyx_v_y0 = __pyx_v_y;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":115
+      /* "Oscillation_lib/Brusselator_cython.pyx":114
  *               x0=x;
  *               y0=y;
  *               action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -3949,24 +3921,24 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_7 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 115, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
       __pyx_t_16 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 115, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
       __pyx_t_17 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
       __pyx_t_18 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_18 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 115, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
       __pyx_t_19 = (__pyx_v_k_3 * pow(__pyx_v_x, 3.0));
       __pyx_t_20 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_20 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 115, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
       __pyx_t_25[0] = (__pyx_v_a * __pyx_v_k1);
       __pyx_t_25[1] = (__pyx_v_k_1 * __pyx_v_x);
@@ -3976,7 +3948,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_25[5] = (__pyx_t_19 / __pyx_t_20);
       memcpy(&(__pyx_v_action_rate[0]), __pyx_t_25, sizeof(__pyx_v_action_rate[0]) * (6));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":116
+      /* "Oscillation_lib/Brusselator_cython.pyx":115
  *               y0=y;
  *               action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               current=[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]             # <<<<<<<<<<<<<<
@@ -3986,24 +3958,24 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_20 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 116, __pyx_L1_error)
+        __PYX_ERR(0, 115, __pyx_L1_error)
       }
       __pyx_t_19 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 116, __pyx_L1_error)
+        __PYX_ERR(0, 115, __pyx_L1_error)
       }
       __pyx_t_18 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
       __pyx_t_17 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_17 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 116, __pyx_L1_error)
+        __PYX_ERR(0, 115, __pyx_L1_error)
       }
       __pyx_t_16 = (__pyx_v_k_3 * pow(__pyx_v_x, 3.0));
       __pyx_t_7 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_7 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 116, __pyx_L1_error)
+        __PYX_ERR(0, 115, __pyx_L1_error)
       }
       __pyx_t_26[0] = (__pyx_v_a * __pyx_v_k1);
       __pyx_t_26[1] = (__pyx_v_k_1 * __pyx_v_x);
@@ -4013,7 +3985,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_26[5] = (__pyx_t_16 / __pyx_t_7);
       memcpy(&(__pyx_v_current[0]), __pyx_t_26, sizeof(__pyx_v_current[0]) * (6));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":117
+      /* "Oscillation_lib/Brusselator_cython.pyx":116
  *               action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               current=[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               entropy=0;             # <<<<<<<<<<<<<<
@@ -4022,7 +3994,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       __pyx_v_entropy = 0.0;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":118
+      /* "Oscillation_lib/Brusselator_cython.pyx":117
  *               current=[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  *               entropy=0;
  *               for h in range(3):             # <<<<<<<<<<<<<<
@@ -4032,7 +4004,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       for (__pyx_t_27 = 0; __pyx_t_27 < 3; __pyx_t_27+=1) {
         __pyx_v_h = __pyx_t_27;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":119
+        /* "Oscillation_lib/Brusselator_cython.pyx":118
  *               entropy=0;
  *               for h in range(3):
  *                   if current[2*h+1]>0:             # <<<<<<<<<<<<<<
@@ -4042,7 +4014,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         __pyx_t_24 = (((__pyx_v_current[((2 * __pyx_v_h) + 1)]) > 0.0) != 0);
         if (__pyx_t_24) {
 
-          /* "Oscillation_lib/Brusselator_cython.pyx":120
+          /* "Oscillation_lib/Brusselator_cython.pyx":119
  *               for h in range(3):
  *                   if current[2*h+1]>0:
  *                     entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])             # <<<<<<<<<<<<<<
@@ -4053,11 +4025,11 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
           __pyx_t_16 = (__pyx_v_current[((2 * __pyx_v_h) + 1)]);
           if (unlikely(__pyx_t_16 == 0)) {
             PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-            __PYX_ERR(0, 120, __pyx_L1_error)
+            __PYX_ERR(0, 119, __pyx_L1_error)
           }
           __pyx_v_entropy = (__pyx_v_entropy + (((__pyx_v_current[(2 * __pyx_v_h)]) - (__pyx_v_current[((2 * __pyx_v_h) + 1)])) * log((__pyx_t_7 / __pyx_t_16))));
 
-          /* "Oscillation_lib/Brusselator_cython.pyx":119
+          /* "Oscillation_lib/Brusselator_cython.pyx":118
  *               entropy=0;
  *               for h in range(3):
  *                   if current[2*h+1]>0:             # <<<<<<<<<<<<<<
@@ -4067,27 +4039,27 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         }
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":121
+      /* "Oscillation_lib/Brusselator_cython.pyx":120
  *                   if current[2*h+1]>0:
  *                     entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):             # <<<<<<<<<<<<<<
  *                  entropy_sum=entropy_sum+entropy
  *               for h in range(len(action_rate)):
  */
-      __pyx_t_16 = __Pyx_PyObject_AsDouble(__pyx_n_s_NaN); if (unlikely(__pyx_t_16 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_AsDouble(__pyx_n_s_NaN); if (unlikely(__pyx_t_16 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L1_error)
       __pyx_t_28 = ((__pyx_v_entropy != __pyx_t_16) != 0);
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L15_bool_binop_done;
       }
-      __pyx_t_16 = __Pyx_PyObject_AsDouble(__pyx_n_s_Inf); if (unlikely(__pyx_t_16 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_AsDouble(__pyx_n_s_Inf); if (unlikely(__pyx_t_16 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 120, __pyx_L1_error)
       __pyx_t_28 = ((__pyx_v_entropy != __pyx_t_16) != 0);
       __pyx_t_24 = __pyx_t_28;
       __pyx_L15_bool_binop_done:;
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":122
+        /* "Oscillation_lib/Brusselator_cython.pyx":121
  *                     entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):
  *                  entropy_sum=entropy_sum+entropy             # <<<<<<<<<<<<<<
@@ -4096,7 +4068,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_entropy_sum = (__pyx_v_entropy_sum + __pyx_v_entropy);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":121
+        /* "Oscillation_lib/Brusselator_cython.pyx":120
  *                   if current[2*h+1]>0:
  *                     entropy=entropy+(current[2*h]-current[2*h+1])*log(current[2*h]/current[2*h+1])
  *               if entropy!=float('NaN') and entropy!=float('Inf'):             # <<<<<<<<<<<<<<
@@ -4105,21 +4077,21 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":123
+      /* "Oscillation_lib/Brusselator_cython.pyx":122
  *               if entropy!=float('NaN') and entropy!=float('Inf'):
  *                  entropy_sum=entropy_sum+entropy
  *               for h in range(len(action_rate)):             # <<<<<<<<<<<<<<
  *                    sum_rate[h]=0;
  *               sum_rate[0]=action_rate[0];
  */
-      __pyx_t_13 = __Pyx_carray_to_py_double(__pyx_v_action_rate, 6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 123, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_carray_to_py_double(__pyx_v_action_rate, 6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_29 = PyObject_Length(__pyx_t_13); if (unlikely(__pyx_t_29 == ((Py_ssize_t)-1))) __PYX_ERR(0, 123, __pyx_L1_error)
+      __pyx_t_29 = PyObject_Length(__pyx_t_13); if (unlikely(__pyx_t_29 == ((Py_ssize_t)-1))) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       for (__pyx_t_27 = 0; __pyx_t_27 < __pyx_t_29; __pyx_t_27+=1) {
         __pyx_v_h = __pyx_t_27;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":124
+        /* "Oscillation_lib/Brusselator_cython.pyx":123
  *                  entropy_sum=entropy_sum+entropy
  *               for h in range(len(action_rate)):
  *                    sum_rate[h]=0;             # <<<<<<<<<<<<<<
@@ -4129,7 +4101,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         (__pyx_v_sum_rate[__pyx_v_h]) = 0.0;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":125
+      /* "Oscillation_lib/Brusselator_cython.pyx":124
  *               for h in range(len(action_rate)):
  *                    sum_rate[h]=0;
  *               sum_rate[0]=action_rate[0];             # <<<<<<<<<<<<<<
@@ -4138,22 +4110,22 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       (__pyx_v_sum_rate[0]) = (__pyx_v_action_rate[0]);
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":126
+      /* "Oscillation_lib/Brusselator_cython.pyx":125
  *                    sum_rate[h]=0;
  *               sum_rate[0]=action_rate[0];
  *               for h in range(len(action_rate)-1):             # <<<<<<<<<<<<<<
  *                     sum_rate[h+1] = sum_rate[h]+action_rate[h+1]
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)
  */
-      __pyx_t_13 = __Pyx_carray_to_py_double(__pyx_v_action_rate, 6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 126, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_carray_to_py_double(__pyx_v_action_rate, 6); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 125, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_29 = PyObject_Length(__pyx_t_13); if (unlikely(__pyx_t_29 == ((Py_ssize_t)-1))) __PYX_ERR(0, 126, __pyx_L1_error)
+      __pyx_t_29 = PyObject_Length(__pyx_t_13); if (unlikely(__pyx_t_29 == ((Py_ssize_t)-1))) __PYX_ERR(0, 125, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __pyx_t_30 = (__pyx_t_29 - 1);
       for (__pyx_t_27 = 0; __pyx_t_27 < __pyx_t_30; __pyx_t_27+=1) {
         __pyx_v_h = __pyx_t_27;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":127
+        /* "Oscillation_lib/Brusselator_cython.pyx":126
  *               sum_rate[0]=action_rate[0];
  *               for h in range(len(action_rate)-1):
  *                     sum_rate[h+1] = sum_rate[h]+action_rate[h+1]             # <<<<<<<<<<<<<<
@@ -4163,7 +4135,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         (__pyx_v_sum_rate[(__pyx_v_h + 1)]) = ((__pyx_v_sum_rate[__pyx_v_h]) + (__pyx_v_action_rate[(__pyx_v_h + 1)]));
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":128
+      /* "Oscillation_lib/Brusselator_cython.pyx":127
  *               for h in range(len(action_rate)-1):
  *                     sum_rate[h+1] = sum_rate[h]+action_rate[h+1]
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)             # <<<<<<<<<<<<<<
@@ -4173,28 +4145,28 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_16 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 128, __pyx_L1_error)
+        __PYX_ERR(0, 127, __pyx_L1_error)
       }
       __pyx_t_7 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 128, __pyx_L1_error)
+        __PYX_ERR(0, 127, __pyx_L1_error)
       }
       __pyx_t_17 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
       __pyx_t_18 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_18 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 128, __pyx_L1_error)
+        __PYX_ERR(0, 127, __pyx_L1_error)
       }
       __pyx_t_19 = (__pyx_v_k_3 * pow(__pyx_v_x, 3.0));
       __pyx_t_20 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_20 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 128, __pyx_L1_error)
+        __PYX_ERR(0, 127, __pyx_L1_error)
       }
       __pyx_v_a0 = ((((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_t_16 / __pyx_v_v)) + (__pyx_t_7 / __pyx_v_v)) + (__pyx_t_17 / __pyx_t_18)) + (__pyx_t_19 / __pyx_t_20));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":130
+      /* "Oscillation_lib/Brusselator_cython.pyx":129
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)
  *               #print 'sum of rates', sum_rate
  *               rr[0], rr[1]=(rand()+1.00)/(RAND_MAX + 1.00), (rand()+1.00)/(RAND_MAX + 1.00)             # <<<<<<<<<<<<<<
@@ -4205,20 +4177,20 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_19 = (RAND_MAX + 1.00);
       if (unlikely(__pyx_t_19 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 130, __pyx_L1_error)
+        __PYX_ERR(0, 129, __pyx_L1_error)
       }
       __pyx_t_18 = (__pyx_t_20 / __pyx_t_19);
       __pyx_t_19 = (rand() + 1.00);
       __pyx_t_20 = (RAND_MAX + 1.00);
       if (unlikely(__pyx_t_20 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 130, __pyx_L1_error)
+        __PYX_ERR(0, 129, __pyx_L1_error)
       }
       __pyx_t_17 = (__pyx_t_19 / __pyx_t_20);
       (__pyx_v_rr[0]) = __pyx_t_18;
       (__pyx_v_rr[1]) = __pyx_t_17;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":131
+      /* "Oscillation_lib/Brusselator_cython.pyx":130
  *               #print 'sum of rates', sum_rate
  *               rr[0], rr[1]=(rand()+1.00)/(RAND_MAX + 1.00), (rand()+1.00)/(RAND_MAX + 1.00)
  *               time=time+(1.000/a0)*log(1.000/rr[0]);             # <<<<<<<<<<<<<<
@@ -4227,15 +4199,15 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       if (unlikely(__pyx_v_a0 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 131, __pyx_L1_error)
+        __PYX_ERR(0, 130, __pyx_L1_error)
       }
       if (unlikely((__pyx_v_rr[0]) == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 131, __pyx_L1_error)
+        __PYX_ERR(0, 130, __pyx_L1_error)
       }
       __pyx_v_time = (__pyx_v_time + ((1.000 / __pyx_v_a0) * log((1.000 / (__pyx_v_rr[0])))));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":132
+      /* "Oscillation_lib/Brusselator_cython.pyx":131
  *               rr[0], rr[1]=(rand()+1.00)/(RAND_MAX + 1.00), (rand()+1.00)/(RAND_MAX + 1.00)
  *               time=time+(1.000/a0)*log(1.000/rr[0]);
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)             # <<<<<<<<<<<<<<
@@ -4245,28 +4217,28 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_17 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 132, __pyx_L1_error)
+        __PYX_ERR(0, 131, __pyx_L1_error)
       }
       __pyx_t_18 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 132, __pyx_L1_error)
+        __PYX_ERR(0, 131, __pyx_L1_error)
       }
       __pyx_t_20 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
       __pyx_t_19 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_19 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 132, __pyx_L1_error)
+        __PYX_ERR(0, 131, __pyx_L1_error)
       }
       __pyx_t_7 = (__pyx_v_k_3 * pow(__pyx_v_x, 3.0));
       __pyx_t_16 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_16 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 132, __pyx_L1_error)
+        __PYX_ERR(0, 131, __pyx_L1_error)
       }
       __pyx_v_a0 = ((((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_t_17 / __pyx_v_v)) + (__pyx_t_18 / __pyx_v_v)) + (__pyx_t_20 / __pyx_t_19)) + (__pyx_t_7 / __pyx_t_16));
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":134
+      /* "Oscillation_lib/Brusselator_cython.pyx":133
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1             # <<<<<<<<<<<<<<
@@ -4276,7 +4248,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (__pyx_v_a * __pyx_v_k1)) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":135
+        /* "Oscillation_lib/Brusselator_cython.pyx":134
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1             # <<<<<<<<<<<<<<
@@ -4285,7 +4257,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":134
+        /* "Oscillation_lib/Brusselator_cython.pyx":133
  *               a0=(a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2+k_3*x**3/v**2)
  * ################################################################################################################
  *               if rr[1]*a0<a*k1:   # a*k1             # <<<<<<<<<<<<<<
@@ -4295,7 +4267,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         goto __pyx_L21;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":136
+      /* "Oscillation_lib/Brusselator_cython.pyx":135
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x             # <<<<<<<<<<<<<<
@@ -4305,7 +4277,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < ((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x))) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":137
+        /* "Oscillation_lib/Brusselator_cython.pyx":136
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1             # <<<<<<<<<<<<<<
@@ -4314,7 +4286,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":136
+        /* "Oscillation_lib/Brusselator_cython.pyx":135
  *               if rr[1]*a0<a*k1:   # a*k1
  *                  x=x+1
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x             # <<<<<<<<<<<<<<
@@ -4324,7 +4296,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         goto __pyx_L21;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":138
+      /* "Oscillation_lib/Brusselator_cython.pyx":137
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v:# k2*b*x/v             # <<<<<<<<<<<<<<
@@ -4334,12 +4306,12 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_16 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 138, __pyx_L1_error)
+        __PYX_ERR(0, 137, __pyx_L1_error)
       }
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_t_16 / __pyx_v_v))) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":139
+        /* "Oscillation_lib/Brusselator_cython.pyx":138
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v:# k2*b*x/v
  *                  x=x-1             # <<<<<<<<<<<<<<
@@ -4348,7 +4320,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":140
+        /* "Oscillation_lib/Brusselator_cython.pyx":139
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v:# k2*b*x/v
  *                  x=x-1
  *                  y=y+1             # <<<<<<<<<<<<<<
@@ -4357,7 +4329,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_y = (__pyx_v_y + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":138
+        /* "Oscillation_lib/Brusselator_cython.pyx":137
  *               elif rr[1]*a0<a*k1+k_1*x:   # k_1*x
  *                  x=x-1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v:# k2*b*x/v             # <<<<<<<<<<<<<<
@@ -4367,7 +4339,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         goto __pyx_L21;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":141
+      /* "Oscillation_lib/Brusselator_cython.pyx":140
  *                  x=x-1
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v:   #k_2*c*y/v             # <<<<<<<<<<<<<<
@@ -4377,17 +4349,17 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_16 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 141, __pyx_L1_error)
+        __PYX_ERR(0, 140, __pyx_L1_error)
       }
       __pyx_t_7 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 141, __pyx_L1_error)
+        __PYX_ERR(0, 140, __pyx_L1_error)
       }
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < ((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_t_16 / __pyx_v_v)) + (__pyx_t_7 / __pyx_v_v))) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":142
+        /* "Oscillation_lib/Brusselator_cython.pyx":141
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v:   #k_2*c*y/v
  *                  x=x+1;             # <<<<<<<<<<<<<<
@@ -4396,7 +4368,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":143
+        /* "Oscillation_lib/Brusselator_cython.pyx":142
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v:   #k_2*c*y/v
  *                  x=x+1;
  *                  y=y-1;             # <<<<<<<<<<<<<<
@@ -4405,7 +4377,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_y = (__pyx_v_y - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":141
+        /* "Oscillation_lib/Brusselator_cython.pyx":140
  *                  x=x-1
  *                  y=y+1
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v:   #k_2*c*y/v             # <<<<<<<<<<<<<<
@@ -4415,7 +4387,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         goto __pyx_L21;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":144
+      /* "Oscillation_lib/Brusselator_cython.pyx":143
  *                  x=x+1;
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2: #k3*x**2*y/v**2             # <<<<<<<<<<<<<<
@@ -4425,23 +4397,23 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_7 = ((__pyx_v_k2 * __pyx_v_b) * __pyx_v_x);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 144, __pyx_L1_error)
+        __PYX_ERR(0, 143, __pyx_L1_error)
       }
       __pyx_t_16 = ((__pyx_v_k_2 * __pyx_v_c) * __pyx_v_y);
       if (unlikely(__pyx_v_v == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 144, __pyx_L1_error)
+        __PYX_ERR(0, 143, __pyx_L1_error)
       }
       __pyx_t_19 = ((__pyx_v_k3 * pow(__pyx_v_x, 2.0)) * __pyx_v_y);
       __pyx_t_20 = pow(__pyx_v_v, 2.0);
       if (unlikely(__pyx_t_20 == 0)) {
         PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-        __PYX_ERR(0, 144, __pyx_L1_error)
+        __PYX_ERR(0, 143, __pyx_L1_error)
       }
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < (((((__pyx_v_a * __pyx_v_k1) + (__pyx_v_k_1 * __pyx_v_x)) + (__pyx_t_7 / __pyx_v_v)) + (__pyx_t_16 / __pyx_v_v)) + (__pyx_t_19 / __pyx_t_20))) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":145
+        /* "Oscillation_lib/Brusselator_cython.pyx":144
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2: #k3*x**2*y/v**2
  *                  x=x+1             # <<<<<<<<<<<<<<
@@ -4450,7 +4422,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":146
+        /* "Oscillation_lib/Brusselator_cython.pyx":145
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2: #k3*x**2*y/v**2
  *                  x=x+1
  *                  y=y-1             # <<<<<<<<<<<<<<
@@ -4459,7 +4431,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_y = (__pyx_v_y - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":144
+        /* "Oscillation_lib/Brusselator_cython.pyx":143
  *                  x=x+1;
  *                  y=y-1;
  *               elif rr[1]*a0<a*k1+k_1*x+k2*b*x/v+k_2*c*y/v+k3*x**2*y/v**2: #k3*x**2*y/v**2             # <<<<<<<<<<<<<<
@@ -4469,7 +4441,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         goto __pyx_L21;
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":147
+      /* "Oscillation_lib/Brusselator_cython.pyx":146
  *                  x=x+1
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2             # <<<<<<<<<<<<<<
@@ -4479,7 +4451,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       __pyx_t_24 = ((((__pyx_v_rr[1]) * __pyx_v_a0) < __pyx_v_a0) != 0);
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":148
+        /* "Oscillation_lib/Brusselator_cython.pyx":147
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2
  *                  x=x-1             # <<<<<<<<<<<<<<
@@ -4488,7 +4460,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_x = (__pyx_v_x - 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":149
+        /* "Oscillation_lib/Brusselator_cython.pyx":148
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2
  *                  x=x-1
  *                  y=y+1             # <<<<<<<<<<<<<<
@@ -4497,7 +4469,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_y = (__pyx_v_y + 1.0);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":147
+        /* "Oscillation_lib/Brusselator_cython.pyx":146
  *                  x=x+1
  *                  y=y-1
  *               elif rr[1]*a0<a0: # k_3*x**3/v**2             # <<<<<<<<<<<<<<
@@ -4507,60 +4479,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       }
       __pyx_L21:;
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":151
+      /* "Oscillation_lib/Brusselator_cython.pyx":150
  *                  y=y+1
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  */
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_14); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_14 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_14); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_13 = PyObject_RichCompare(__pyx_t_14, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_13 = PyObject_RichCompare(__pyx_t_14, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_14 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_t_14, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_t_14, Py_EQ); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L23_bool_binop_done;
       }
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_14 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_14); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_14 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_14); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       __pyx_t_24 = __pyx_t_28;
       __pyx_L23_bool_binop_done:;
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":152
+        /* "Oscillation_lib/Brusselator_cython.pyx":151
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:
  *                   counter=counter+1;             # <<<<<<<<<<<<<<
@@ -4569,60 +4541,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_counter = (__pyx_v_counter + 1);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":153
+        /* "Oscillation_lib/Brusselator_cython.pyx":152
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')             # <<<<<<<<<<<<<<
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  */
-        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_13 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_13 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_13);
         PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_13);
         __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_11 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_13);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_13);
         __pyx_t_13 = 0;
-        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_11, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_11, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __pyx_t_13 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_13 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyFloat_FromDouble((__pyx_v_time - __pyx_v_time0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_5 = PyFloat_FromDouble((__pyx_v_time - __pyx_v_time0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5);
         __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyNumber_Add(__pyx_t_13, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_11 = PyNumber_Add(__pyx_t_13, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 152, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_11 = NULL;
@@ -4636,14 +4608,14 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
           }
         }
         if (!__pyx_t_11) {
-          __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 153, __pyx_L1_error)
+          __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_14);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_12)) {
             PyObject *__pyx_temp[2] = {__pyx_t_11, __pyx_t_5};
-            __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 153, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_14);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4652,20 +4624,20 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_12)) {
             PyObject *__pyx_temp[2] = {__pyx_t_11, __pyx_t_5};
-            __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 153, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyCFunction_FastCall(__pyx_t_12, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_14);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           } else
           #endif
           {
-            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 153, __pyx_L1_error)
+            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 152, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_11); __pyx_t_11 = NULL;
             __Pyx_GIVEREF(__pyx_t_5);
             PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_5);
             __pyx_t_5 = 0;
-            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 153, __pyx_L1_error)
+            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 152, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_14);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           }
@@ -4673,7 +4645,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":154
+        /* "Oscillation_lib/Brusselator_cython.pyx":153
  *                   counter=counter+1;
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time             # <<<<<<<<<<<<<<
@@ -4682,7 +4654,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_time0 = __pyx_v_time;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":151
+        /* "Oscillation_lib/Brusselator_cython.pyx":150
  *                  y=y+1
  * ################################################################################################################
  *               if x0 == win_threshold1 and y < win_threshold2 and x==win_threshold1+1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
@@ -4691,60 +4663,60 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
       }
 
-      /* "Oscillation_lib/Brusselator_cython.pyx":155
+      /* "Oscillation_lib/Brusselator_cython.pyx":154
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  */
-      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_14 = PyFloat_FromDouble(__pyx_v_x0); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_14);
-      __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyInt_AddObjC(__pyx_v_win_threshold1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = PyObject_RichCompare(__pyx_t_14, __pyx_t_12, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_13 = PyObject_RichCompare(__pyx_t_14, __pyx_t_12, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L28_bool_binop_done;
       }
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L28_bool_binop_done;
       }
-      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_13 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_13 = PyObject_RichCompare(__pyx_t_12, __pyx_v_win_threshold1, Py_EQ); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       if (__pyx_t_28) {
       } else {
         __pyx_t_24 = __pyx_t_28;
         goto __pyx_L28_bool_binop_done;
       }
-      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_13 = PyFloat_FromDouble(__pyx_v_y0); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_12 = PyObject_RichCompare(__pyx_t_13, __pyx_v_win_threshold2, Py_LT); __Pyx_XGOTREF(__pyx_t_12); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 155, __pyx_L1_error)
+      __pyx_t_28 = __Pyx_PyObject_IsTrue(__pyx_t_12); if (unlikely(__pyx_t_28 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_t_24 = __pyx_t_28;
       __pyx_L28_bool_binop_done:;
       if (__pyx_t_24) {
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":156
+        /* "Oscillation_lib/Brusselator_cython.pyx":155
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  *                   counter=counter-1;             # <<<<<<<<<<<<<<
@@ -4753,43 +4725,43 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
  */
         __pyx_v_counter = (__pyx_v_counter - 1);
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":157
+        /* "Oscillation_lib/Brusselator_cython.pyx":156
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')             # <<<<<<<<<<<<<<
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum)+'\n';
  *         File1.write(output1)
  */
-        __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_write); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_14 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_14);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_14);
         __pyx_t_14 = 0;
-        __pyx_t_14 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyNumber_Add(__pyx_t_14, __pyx_kp_s__3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_5 = PyNumber_Add(__pyx_t_14, __pyx_kp_s__3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-        __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_14);
         PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_14);
         __pyx_t_14 = 0;
-        __pyx_t_14 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_14 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_11, NULL); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = PyNumber_Add(__pyx_t_5, __pyx_t_14); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_11 = PyNumber_Add(__pyx_t_5, __pyx_t_14); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-        __pyx_t_14 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_14 = PyNumber_Add(__pyx_t_11, __pyx_kp_s__5); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 156, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_11 = NULL;
@@ -4803,14 +4775,14 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
           }
         }
         if (!__pyx_t_11) {
-          __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+          __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
           __Pyx_GOTREF(__pyx_t_12);
         } else {
           #if CYTHON_FAST_PYCALL
           if (PyFunction_Check(__pyx_t_13)) {
             PyObject *__pyx_temp[2] = {__pyx_t_11, __pyx_t_14};
-            __pyx_t_12 = __Pyx_PyFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+            __pyx_t_12 = __Pyx_PyFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -4819,20 +4791,20 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
           #if CYTHON_FAST_PYCCALL
           if (__Pyx_PyFastCFunction_Check(__pyx_t_13)) {
             PyObject *__pyx_temp[2] = {__pyx_t_11, __pyx_t_14};
-            __pyx_t_12 = __Pyx_PyCFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+            __pyx_t_12 = __Pyx_PyCFunction_FastCall(__pyx_t_13, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
             __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
           } else
           #endif
           {
-            __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+            __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 156, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_11); __pyx_t_11 = NULL;
             __Pyx_GIVEREF(__pyx_t_14);
             PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_14);
             __pyx_t_14 = 0;
-            __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
+            __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 156, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           }
@@ -4840,7 +4812,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-        /* "Oscillation_lib/Brusselator_cython.pyx":155
+        /* "Oscillation_lib/Brusselator_cython.pyx":154
  *                   File2.write(str(time)+', '+str(counter)+','+ str(time-time0)+'\n')
  *                   time0=time
  *               if x0 == win_threshold1+1 and y < win_threshold2 and x==win_threshold1 and y0 < win_threshold2:             # <<<<<<<<<<<<<<
@@ -4850,105 +4822,105 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       }
     }
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":158
+    /* "Oscillation_lib/Brusselator_cython.pyx":157
  *                   counter=counter-1;
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum)+'\n';             # <<<<<<<<<<<<<<
  *         File1.write(output1)
  *     File1.close()
  */
-    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_time); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_GIVEREF(__pyx_t_12);
     PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_12);
     __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_13, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_13, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_x); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_12);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_12);
     __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__4); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyFloat_FromDouble(__pyx_v_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = PyTuple_New(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_GIVEREF(__pyx_t_5);
     PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_5);
     __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_13, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_13, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_t_5); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_kp_s__4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_counter); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_GIVEREF(__pyx_t_13);
     PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_13);
     __pyx_t_13 = 0;
-    __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_12, NULL); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_t_13); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_13 = PyNumber_Add(__pyx_t_12, __pyx_kp_s__4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_entropy_sum); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyFloat_FromDouble(__pyx_v_entropy_sum); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_12);
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_12);
     __pyx_t_12 = 0;
-    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Call(((PyObject *)(&PyString_Type)), __pyx_t_5, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Add(__pyx_t_13, __pyx_t_12); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
+    __pyx_t_12 = PyNumber_Add(__pyx_t_5, __pyx_kp_s__5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 157, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_output1, __pyx_t_12);
     __pyx_t_12 = 0;
 
-    /* "Oscillation_lib/Brusselator_cython.pyx":159
+    /* "Oscillation_lib/Brusselator_cython.pyx":158
  *                   File2.write(str(time)+', '+str(counter)+'\n')
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum)+'\n';
  *         File1.write(output1)             # <<<<<<<<<<<<<<
  *     File1.close()
  *     File2.close()
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_13 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4961,13 +4933,13 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       }
     }
     if (!__pyx_t_13) {
-      __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_output1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+      __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_output1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_12);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_v_output1};
-        __pyx_t_12 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_GOTREF(__pyx_t_12);
       } else
@@ -4975,19 +4947,19 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_13, __pyx_v_output1};
-        __pyx_t_12 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
         __Pyx_GOTREF(__pyx_t_12);
       } else
       #endif
       {
-        __pyx_t_14 = PyTuple_New(1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 159, __pyx_L1_error)
+        __pyx_t_14 = PyTuple_New(1+1); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 158, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_14);
         __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13); __pyx_t_13 = NULL;
         __Pyx_INCREF(__pyx_v_output1);
         __Pyx_GIVEREF(__pyx_v_output1);
         PyTuple_SET_ITEM(__pyx_t_14, 0+1, __pyx_v_output1);
-        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_14, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_14, NULL); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 158, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
       }
@@ -4996,14 +4968,42 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
   }
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":160
+  /* "Oscillation_lib/Brusselator_cython.pyx":159
  *         output1 = str(time)+','+str(x)+','+str(y)+','+str(counter) +','+str(entropy_sum)+'\n';
  *         File1.write(output1)
  *     File1.close()             # <<<<<<<<<<<<<<
  *     File2.close()
  *     return 0
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File1, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_14 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_14)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_14);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
+    }
+  }
+  if (__pyx_t_14) {
+    __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+  } else {
+    __pyx_t_12 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 159, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_12);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+
+  /* "Oscillation_lib/Brusselator_cython.pyx":160
+ *         File1.write(output1)
+ *     File1.close()
+ *     File2.close()             # <<<<<<<<<<<<<<
+ *     return 0
+ */
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_14 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -5026,34 +5026,6 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
   /* "Oscillation_lib/Brusselator_cython.pyx":161
- *         File1.write(output1)
- *     File1.close()
- *     File2.close()             # <<<<<<<<<<<<<<
- *     return 0
- */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_File2, __pyx_n_s_close); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_14 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_5);
-    if (likely(__pyx_t_14)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_14);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_5, function);
-    }
-  }
-  if (__pyx_t_14) {
-    __pyx_t_12 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_14); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 161, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-  } else {
-    __pyx_t_12 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 161, __pyx_L1_error)
-  }
-  __Pyx_GOTREF(__pyx_t_12);
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-
-  /* "Oscillation_lib/Brusselator_cython.pyx":162
  *     File1.close()
  *     File2.close()
  *     return 0             # <<<<<<<<<<<<<<
@@ -5063,7 +5035,7 @@ static PyObject *__pyx_pf_15Oscillation_lib_18Brusselator_cython_2Brusselator_lo
   __pyx_r = __pyx_int_0;
   goto __pyx_L0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":94
+  /* "Oscillation_lib/Brusselator_cython.pyx":93
  *     File2.close()
  * 
  * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):             # <<<<<<<<<<<<<<
@@ -7964,10 +7936,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_counter1, __pyx_k_counter1, sizeof(__pyx_k_counter1), 0, 0, 1, 1},
   {&__pyx_n_s_current, __pyx_k_current, sizeof(__pyx_k_current), 0, 0, 1, 1},
   {&__pyx_n_s_e_s, __pyx_k_e_s, sizeof(__pyx_k_e_s), 0, 0, 1, 1},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_entropy, __pyx_k_entropy, sizeof(__pyx_k_entropy), 0, 0, 1, 1},
   {&__pyx_n_s_entropy_sum, __pyx_k_entropy_sum, sizeof(__pyx_k_entropy_sum), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
   {&__pyx_n_s_fname1, __pyx_k_fname1, sizeof(__pyx_k_fname1), 0, 0, 1, 1},
   {&__pyx_n_s_fname2, __pyx_k_fname2, sizeof(__pyx_k_fname2), 0, 0, 1, 1},
@@ -7996,7 +7966,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_output1, __pyx_k_output1, sizeof(__pyx_k_output1), 0, 0, 1, 1},
   {&__pyx_n_s_par_ini, __pyx_k_par_ini, sizeof(__pyx_k_par_ini), 0, 0, 1, 1},
   {&__pyx_n_s_particle, __pyx_k_particle, sizeof(__pyx_k_particle), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_reactionrate, __pyx_k_reactionrate, sizeof(__pyx_k_reactionrate), 0, 0, 1, 1},
   {&__pyx_n_s_rr, __pyx_k_rr, sizeof(__pyx_k_rr), 0, 0, 1, 1},
@@ -8022,12 +7991,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 41, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_builtin_open = __Pyx_GetBuiltinName(__pyx_n_s_open); if (!__pyx_builtin_open) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 47, __pyx_L1_error)
   #if PY_MAJOR_VERSION >= 3
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_xrange) __PYX_ERR(0, 108, __pyx_L1_error)
   #else
-  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_builtin_xrange = __Pyx_GetBuiltinName(__pyx_n_s_xrange); if (!__pyx_builtin_xrange) __PYX_ERR(0, 108, __pyx_L1_error)
   #endif
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 235, __pyx_L1_error)
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(1, 823, __pyx_L1_error)
@@ -8041,47 +8010,47 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":42
- *     print k_2
+  /* "Oscillation_lib/Brusselator_cython.pyx":41
+ *     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')             # <<<<<<<<<<<<<<
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_time_x_y_counter_entropy); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_time_x_y_counter_entropy); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":44
+  /* "Oscillation_lib/Brusselator_cython.pyx":43
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')             # <<<<<<<<<<<<<<
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b, k_2*y, k3*x**2*y/v**2,k_3*x**3/v**2]
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_time_counter_duration); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_s_time_counter_duration); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":103
+  /* "Oscillation_lib/Brusselator_cython.pyx":102
  *    # print R, X, MR, Mp, MpK,M
  *     File1 = open(fname1,"w")
  *     File1.write('time, x, y, counter, entropy \n')             # <<<<<<<<<<<<<<
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_time_x_y_counter_entropy); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 103, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_time_x_y_counter_entropy); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":105
+  /* "Oscillation_lib/Brusselator_cython.pyx":104
  *     File1.write('time, x, y, counter, entropy \n')
  *     File2 = open(fname2,"w")
  *     File2.write('time, counter, duration \n')             # <<<<<<<<<<<<<<
  *     entropy=0;
  *     action_rate =[a*k1, k_1*x, k2*b*x/v, k_2*c*y/v, k3*x**2*y/v**2,k_3*x**3/v**2]
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_time_counter_duration); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_time_counter_duration); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
@@ -8194,17 +8163,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__17);
   __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(8, 0, 44, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Oscillation_lib_Brusselator_cyth, __pyx_n_s_Brusse_Barato_loopProgress, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 33, __pyx_L1_error)
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":94
+  /* "Oscillation_lib/Brusselator_cython.pyx":93
  *     File2.close()
  * 
  * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):             # <<<<<<<<<<<<<<
  *     cdef double a, b, c, k1, k2, k3, k_1, k_2, k_3, x, y, time, rr[2], step, v,time1
  *     cdef int N, counter, counter1, i, j,n_c, h, particle
  */
-  __pyx_tuple__19 = PyTuple_Pack(45, __pyx_n_s_fname1, __pyx_n_s_fname2, __pyx_n_s_fname3, __pyx_n_s_numberOfReactions, __pyx_n_s_win_threshold1, __pyx_n_s_win_threshold2, __pyx_n_s_reactionrate, __pyx_n_s_par_ini, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_c, __pyx_n_s_k1, __pyx_n_s_k2, __pyx_n_s_k3, __pyx_n_s_k_1, __pyx_n_s_k_2, __pyx_n_s_k_3, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_time, __pyx_n_s_rr, __pyx_n_s_step, __pyx_n_s_v, __pyx_n_s_time1, __pyx_n_s_N, __pyx_n_s_counter, __pyx_n_s_counter1, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_n_c, __pyx_n_s_h, __pyx_n_s_particle, __pyx_n_s_action_rate, __pyx_n_s_sum_rate, __pyx_n_s_time0, __pyx_n_s_current, __pyx_n_s_entropy_sum, __pyx_n_s_entropy, __pyx_n_s_e_s, __pyx_n_s_File1, __pyx_n_s_File2, __pyx_n_s_x0, __pyx_n_s_y0, __pyx_n_s_a0, __pyx_n_s_output1); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(45, __pyx_n_s_fname1, __pyx_n_s_fname2, __pyx_n_s_fname3, __pyx_n_s_numberOfReactions, __pyx_n_s_win_threshold1, __pyx_n_s_win_threshold2, __pyx_n_s_reactionrate, __pyx_n_s_par_ini, __pyx_n_s_a, __pyx_n_s_b, __pyx_n_s_c, __pyx_n_s_k1, __pyx_n_s_k2, __pyx_n_s_k3, __pyx_n_s_k_1, __pyx_n_s_k_2, __pyx_n_s_k_3, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_time, __pyx_n_s_rr, __pyx_n_s_step, __pyx_n_s_v, __pyx_n_s_time1, __pyx_n_s_N, __pyx_n_s_counter, __pyx_n_s_counter1, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_n_c, __pyx_n_s_h, __pyx_n_s_particle, __pyx_n_s_action_rate, __pyx_n_s_sum_rate, __pyx_n_s_time0, __pyx_n_s_current, __pyx_n_s_entropy_sum, __pyx_n_s_entropy, __pyx_n_s_e_s, __pyx_n_s_File1, __pyx_n_s_File2, __pyx_n_s_x0, __pyx_n_s_y0, __pyx_n_s_a0, __pyx_n_s_output1); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(8, 0, 45, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Oscillation_lib_Brusselator_cyth, __pyx_n_s_Brusselator_loopProgress, 94, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(8, 0, 45, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_Oscillation_lib_Brusselator_cyth, __pyx_n_s_Brusselator_loopProgress, 93, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -8445,16 +8414,16 @@ static int __pyx_pymod_exec_Brusselator_cython(PyObject *__pyx_pyinit_module)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_Brusse_Barato_loopProgress, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "Oscillation_lib/Brusselator_cython.pyx":94
+  /* "Oscillation_lib/Brusselator_cython.pyx":93
  *     File2.close()
  * 
  * def Brusselator_loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_threshold1, win_threshold2, np.ndarray[DTYPE2_t, ndim=1] reactionrate, np.ndarray[DTYPE2_t, ndim=1] par_ini):             # <<<<<<<<<<<<<<
  *     cdef double a, b, c, k1, k2, k3, k_1, k_2, k_3, x, y, time, rr[2], step, v,time1
  *     cdef int N, counter, counter1, i, j,n_c, h, particle
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_15Oscillation_lib_18Brusselator_cython_3Brusselator_loopProgress, NULL, __pyx_n_s_Oscillation_lib_Brusselator_cyth_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_15Oscillation_lib_18Brusselator_cython_3Brusselator_loopProgress, NULL, __pyx_n_s_Oscillation_lib_Brusselator_cyth_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Brusselator_loopProgress, __pyx_t_1) < 0) __PYX_ERR(0, 94, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Brusselator_loopProgress, __pyx_t_1) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "Oscillation_lib/Brusselator_cython.pyx":1
@@ -10351,112 +10320,6 @@ static void __Pyx_ReleaseBuffer(Py_buffer *view) {
         return (target_type) value;\
     }
 
-/* Print */
-        #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
-#endif
-
 /* CIntToPy */
         static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = (int) 0;
@@ -11017,43 +10880,6 @@ raise_neg_overflow:
         "can't convert negative value to int");
     return (int) -1;
 }
-
-/* PrintOne */
-        #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
-#endif
 
 /* CIntFromPy */
         static CYTHON_INLINE size_t __Pyx_PyInt_As_size_t(PyObject *x) {

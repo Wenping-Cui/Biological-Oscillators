@@ -37,7 +37,6 @@ def Brusse_Barato_loopProgress(char* fname1, fname2, fname3, int numberOfReactio
 
     x, y, v, step = par_ini
     a, b, k1, k2, k3, k_1, k_2, k_3 = reactionrate
-    print k_2
     File1 = open(fname1,"w")
     File1.write('time, x, y, counter, entropy \n')
     File2 = open(fname2,"w")

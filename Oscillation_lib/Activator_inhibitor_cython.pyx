@@ -102,7 +102,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
               elif rr[1]*a0<sum_rate[4]:  #  k4*X
                  X = X-1;
 ################################################################################################################
-              elif rr[1]*a0<sum_rate[4]+ error*a1*(R-MR)/v and particle==0:   # particle transition from M to MR
+              elif rr[1]*a0<sum_rate[4]+ error*a1*(R-MR)/v and divmod(particle,4)[1]==0:   # particle transition from M to MR
                  MR = MR+error*1;   
                  M = M-error*1;
                  particle=particle-error*1;   
@@ -110,7 +110,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MR = MR+error*1;   
                  M = M-error*1;
 ################################################################################################################
-              elif rr[1]*a0<sum_rate[5]+ a2*K/v and (abs(particle)==2):   # particle transition from Mp to MpK
+              elif rr[1]*a0<sum_rate[5]+ a2*K/v and (divmod(particle,4)[1]==2):   # particle transition from Mp to MpK
                  Mp = Mp-1;   
                  MpK = MpK+1;     
                  K=K-1;
@@ -120,7 +120,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MpK = MpK+1;     
                  K=K-1;
 ################################################################################################################
-              elif rr[1]*a0<sum_rate[6]+ d1 and (particle==3 or particle==-1):   # particle transition from MR to M
+              elif rr[1]*a0<sum_rate[6]+ d1 and (divmod(particle,4)[1]==3):   # particle transition from MR to M
                  MR = MR -1;   
                  M=M+1;
                  particle=particle+1;         
@@ -128,7 +128,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MR = MR -1;   
                  M=M+1;
 ################################################################################################################ 
-              elif rr[1]*a0<sum_rate[7]+ d2 and (particle==-3 or particle==1):   # particle transition from MpK to Mp
+              elif rr[1]*a0<sum_rate[7]+ d2 and (divmod(particle,4)[1]==1):   # particle transition from MpK to Mp
                  MpK = MpK -1; 
                  Mp = Mp + 1;
                  K=K+1;
@@ -138,7 +138,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  Mp = Mp + 1;
                  K=K+1;
 ################################################################################################################  
-              elif rr[1]*a0<sum_rate[8]+ f1 and (particle==3 or particle==-1):   # particle transition from MR to Mp
+              elif rr[1]*a0<sum_rate[8]+ f1 and (divmod(particle,4)[1]==3):   # particle transition from MR to Mp
                  MR = MR -1;
                  Mp = Mp+1;
                  particle=particle-1;     
@@ -146,7 +146,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MR = MR -1;
                  Mp = Mp+1;
 ################################################################################################################ 
-              elif rr[1]*a0<sum_rate[9]+ error*f_1*(R-MR)/v and (abs(particle)==2):   # particle transition from Mp to MR
+              elif rr[1]*a0<sum_rate[9]+ error*f_1*(R-MR)/v and (divmod(particle,4)[1]==2):   # particle transition from Mp to MR
                  MR = MR +error*1;
                  Mp = Mp-error*1;
                  particle=particle+error*1; 
@@ -154,7 +154,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MR = MR +error*1;
                  Mp = Mp-error*1;
 ################################################################################################################ 
-              elif rr[1]*a0<sum_rate[10]+ f_2*K/v  and (particle==0):   # particle transition from M to MpK
+              elif rr[1]*a0<sum_rate[10]+ f_2*K/v  and (divmod(particle,4)[1]==0):   # particle transition from M to MpK
                  M = M-1;
                  MpK=MpK+1;
                  K=K-1;
@@ -164,7 +164,7 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
                  MpK=MpK+1;
                  K=K-1;
 ################################################################################################################ 
-              elif rr[1]*a0<sum_rate[11]+ f2 and (particle==1 or particle==-3):   # particle transition from MpK to M
+              elif rr[1]*a0<sum_rate[11]+ f2 and (divmod(particle,4)[1]==1):   # particle transition from MpK to M
                  MpK=MpK-1;
                  M=M+1;
                  K=K+1;
@@ -184,18 +184,16 @@ def loopProgress(char* fname1, fname2, fname3, int numberOfReactions, win_thresh
               if M0 == win_threshold1+1 and MR < win_threshold2 and M==win_threshold1 and MR0 < win_threshold2 :
                   counter=counter-1;  
                   File2.write(str(time)+', '+str(counter)+'\n')   
-              if abs(particle) == 4:
+              if particle == -4:
                   particle=0;
                   counter1=counter1+1;
-                  File3.write(str(time)+', '+str(counter1)+','+ str(time-time1)+'\n') 
+                  File3.write(str(time)+', '+str(counter1)+','+ str(time-time1)+','+str(1)+'\n') 
                   time1=time
-        #current=[f2*MpK,f_2*M*K/v+0.1, a2*Mp*K/v+0.1, d2*MpK,  f1*MR,  f_1*Mp*(R-MR)/v,a1*M*(R - MR)/v ,d1*MR] 
-       
-        #entropy_p=0;
-        #print R, X, M, MR, Mp, MpK
-        #for n_c in xrange(4):         
-        #    entropy_p= entropy_p+(current[2*n_c]-current[2*n_c+1])*np.log(current[2*n_c]/current[2*n_c+1]);
-
+              elif particle==50:
+                  particle=0;
+                  counter1=counter1+1;
+                  File3.write(str(time)+', '+str(counter1)+','+ str(time-time1)+','+str(-1)+'\n') 
+                  time1=time        
         output1 = str(time)+','+str(R)+','+str(X)+','+str(M)+','+str(MR)+','+str(Mp)+','+ str(MpK) +','+str(counter) +','+str(entropy_sum/e_s)+'\n';
         File1.write(output1)
     File1.close()    
